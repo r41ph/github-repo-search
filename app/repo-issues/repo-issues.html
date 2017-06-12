@@ -1,0 +1,27 @@
+<div class="container repo-issues" ng-init="ric.requestIssues()">
+ 	<div class="row">
+ 		<div class="col-xs-12">
+ 			<div controller="repoIssuesCtrl">
+	 			<uib-accordion close-others="false">
+		 			<h1>{{ric.repoName}} repository issues</h1>
+					<ul>
+						<li ng-repeat="res in ric.requestResult" uib-accordion-group>
+							<uib-accordion-heading  is-open="status.open">
+								<div class="repo-results-name">{{res.title}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></div>
+							</uib-accordion-heading>
+							<ul class="repo-results-info">
+								<li class="repo-search-result-description">Open by: {{ res.user.login }}</li>
+								<li class="repo-search-result-description">Issue ID: {{ res.id }}</li>
+								<li class="repo-search-result-description">URL: <a href="{{ res.html_url }}" target="_blank">{{ res.html_url }}</a></li>
+								<li class="repo-search-result-description">State: {{ res.state }}</li>
+								<li class="repo-search-result-description">Created at : {{ res.created_at }}</li>
+								<li class="repo-search-result-description">Details: {{ res.body }}</li>
+							</ul>
+						</li>
+					</ul>
+				</uib-accordion>
+				<back-to-search ></back-to-search>
+			</div>
+ 		</div>
+ 	</div>
+ </div> 

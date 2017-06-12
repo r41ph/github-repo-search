@@ -1,0 +1,46 @@
+<div class="container" ng-controller="repoSearchCtrl">
+	<section class="repo-search">
+		<div class="row repo-search-form">
+		    <h1 class="repo-search-form-label">Github Repository Search</h1>
+			<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+				<form class="clearfix">
+					 <div class="form-group">
+					    <input 
+					    	type="text" 
+					    	class="form-control repo-search-form-input"
+					    	ng-class="{ 'error': rpc.showError}" 
+					    	id="search-input" 
+					    	ng-model="rpc.repoName" 
+					    	placeholder="Enter repository name"
+					    	>
+					 </div>
+					 <div class="error-msg"  ng-class="{ 'error': rpc.showError}" >No repositories found with that name.</div>
+					 <button type="text" class="pull-right btn btn-default btn-search" ng-click="rpc.requestRep()">Find!</button>
+				</form>
+			</div>
+		</div>
+		<uib-accordion close-others="false">
+			<div class="repo-results" ng-show="rpc.showResults">
+				<h2>Repositories containing "<i>{{ rpc.repoName }}</i>"</h2>
+				<ul>
+					<li ng-repeat="res in rpc.requestResult" uib-accordion-group>
+						<uib-accordion-heading  is-open="status.open">
+							<div class="repo-results-name">{{ res.name }} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></div>
+						</uib-accordion-heading>
+
+						<ul class="repo-results-info">
+							<li class="repo-search-result-description">Description: {{ res.description }}</li>
+							<li class="repo-search-result-description">URL: <a href="{{ res.html_url }}" target="_blank">{{ res.html_url }}</a></li>
+							<li class="repo-search-result-description">Forks: {{ res.forks_count }}</li>
+							<li class="repo-search-result-description">Stargazers: {{ res.stargazers_count }}</li>
+							<li class="repo-search-result-description">
+								Open issues: {{ res.open_issues }}
+								<go-to-view-issues owner="res.owner.login" name="res.name"></go-to-view-issues>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</uib-accordion>
+	</section>
+</div>
