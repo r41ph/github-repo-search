@@ -1,2 +1,3 @@
-Playing with the Github API
+Playing with the Github API.
+
 So far tested only in Chrome.
